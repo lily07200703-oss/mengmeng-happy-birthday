@@ -6974,8 +6974,9 @@ html body #app[id] #s14.screen[id] .final .btn.pink:active{
 }
 </style>
 <style id="birthday-intro-24px">
-html body #app[id] #s14.screen[id] .final > div > p.birthday-intro{
-  font-size:24px !important;
+html body #app[id] #s14.screen[id] .final > div > p.birthday-intro {
+  font-size:min(24px,4.65vw)!important;
+  white-space:nowrap;letter-spacing:0!important;text-align:center;
 }
 </style>
 <style id="birthday-card-left-text">
@@ -10383,7 +10384,7 @@ html body #app[id] #s11.screen[id] > h2.memory-sticker-heading > img {
     <div class="final">
       <div>
         <h1 class="birthday-title"><span class="final-name-line"><span class="heart final-name-heart" aria-hidden="true">♥</span><span class="birthday-pearl-text">孟孟</span><span class="heart final-name-heart" aria-hidden="true">♥</span></span><span class="birthday-wish-line"><span class="birthday-pearl-text">生日快樂</span><span class="birthday-glints" aria-hidden="true"><i>✦</i><i>✧</i><i>✦</i><i>✧</i></span></span></h1>
-        <p class="birthday-intro">今天，想把所有的浪漫和心動都送給你。</p>
+        <p class="birthday-intro">今天想把所有的浪漫和心動都送給你</p>
         <div class="card">
           <p><strong>謝謝你的出現，讓我的生活裡多了很多笑聲與期待。</strong></p>
           <p>你有好多我喜歡的地方：</p>
@@ -10689,7 +10690,7 @@ function answer(n,ok,sourceButton){
       quizAdvanceTimer=setTimeout(()=>{
         quizAdvanceTimer=null;
         if(document.getElementById('s'+n).classList.contains('active')) go(n+1);
-      },n===9?450:1500);
+      },1500);
       launchCorrectCelebration();
     }else{
       launchWrongCelebration();
