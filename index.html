@@ -10122,13 +10122,20 @@ html body #app[id] #s11.screen[id] > h2.memory-sticker-heading > img {
 }
 </style>
 <style id="cover-invite-reading-room">
+html body #app[id] #s0.screen[id] .cover-zone-5 .game-card {
+  container-type:inline-size;
+}
+html body #app[id] #s0.screen[id] .cover-zone-5 .game-card > .game-line {
+  container-type:normal;justify-self:center;
+  width:max-content!important;max-width:100%!important;min-height:0!important;
+  padding:8px clamp(8px,2.6vw,14px)!important;
+}
+html body #app[id] #s0.screen[id] .cover-zone-5 .game-card > .game-line .keep {
+  font-size:min(5.4vw,30px)!important;font-size:min(5.9cqi,30px)!important;
+  transform:none!important;
+}
 @media(max-width:600px) {
- html body #app[id] #s0.screen[id] .cover-zone-5 .game-card {
-  padding-inline:6px!important;
- }
- html body #app[id] #s0.screen[id] .cover-zone-5 .game-card > .game-line {
-  width:100%!important;min-height:50px!important;padding-inline:5px!important;
- }
+ html body #app[id] #s0.screen[id] .cover-zone-5 .game-card {padding-inline:6px!important}
 }
 </style>
 <style id="cover-yes-fit-text">
