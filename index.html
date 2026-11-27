@@ -9248,7 +9248,7 @@ html body #app[id] #s0.screen[id] .cover-zone-5 .game-card > .game-line::before,
 html body #app[id] #s0.screen[id] .cover-zone-5 .game-card > .game-line::after {display:none!important}
 html body #app[id] #s0.screen[id] .cover-zone-5 .game-card > .game-line .keep {
   display:inline-block!important;width:max-content!important;max-width:none!important;white-space:nowrap!important;overflow-wrap:normal!important;word-break:normal!important;
-  flex:none!important;font-size:min(4.35vw,24px)!important;font-size:min(5.5cqi,26px)!important;line-height:1.22!important;letter-spacing:-.035em!important;animation:none!important;transition:none!important;transform:none!important;
+  flex:none!important;font-size:min(5.15vw,28px)!important;font-size:min(6.45cqi,30px)!important;line-height:1.22!important;letter-spacing:-.035em!important;animation:none!important;transition:none!important;transform:scaleX(.85)!important;transform-origin:center!important;
 }
 html body #app[id] #s0.screen[id] .cover-zone-5 .game-card > .game-sub {
   display:grid!important;justify-items:center!important;gap:4px!important;
@@ -9584,7 +9584,7 @@ html body #app[id] :is(#s8,#s9).screen[id] {
 .handsome-fullscreen[data-photo="0"]::after {
   z-index:0;
   background:
-    conic-gradient(from 181deg at 98% 0%,transparent 10deg,#ffe99560 29deg,#fff8b9dc 43deg,#fffde8 51deg,#fff2a991 60deg,transparent 80deg),
+    conic-gradient(from calc(var(--sunset-light-axis) - 51deg) at var(--sunset-light-origin),transparent 10deg,#ffe99560 29deg,#fff8b9dc 43deg,#fffde8 51deg,#fff2a991 60deg,transparent 80deg),
     radial-gradient(ellipse 34% 22% at top right,#fffbe1,transparent);
   mask-image:radial-gradient(ellipse 94% 84% at top right,#000 11%,#000bf 39%,transparent 86%);
 }
@@ -9639,9 +9639,10 @@ html body #app[id] :is(#s8,#s9).screen[id] {
 }
 </style>
 <style id="sunset-light-flow">
+.handsome-fullscreen[data-photo="0"] {--sunset-light-axis:232deg;--sunset-light-origin:98% 0%}
 .sunset-streaming-light {display:none}
 .handsome-fullscreen[data-photo="0"] .sunset-streaming-light {
-  --sunset-ray:conic-gradient(from 196deg at 100% 0,transparent 0deg,#fff3bc17 7deg,#fff9db58 18deg,#fff9de74 23deg,#ffefa92a 30deg,transparent 38deg);
+  --sunset-ray:conic-gradient(from calc(var(--sunset-light-axis) - 19deg) at var(--sunset-light-origin),transparent 0deg,#fff3bc17 7deg,#fff9de74 19deg,#ffefa92a 30deg,transparent 38deg);
   display:block;position:absolute;inset:0;pointer-events:none;z-index:3;
   overflow:hidden;mix-blend-mode:screen;
   -webkit-mask-image:linear-gradient(#000 0 45%,transparent 78%);
@@ -10118,26 +10119,6 @@ html body #app[id] #s11.screen[id] > h2.memory-sticker-heading > img {
 .q10-completion-overlay.q10-effects-pending,
 .q10-completion-overlay.q10-effects-pending * {
  animation-play-state:paused!important;
-}
-.q10-completion-overlay .q10-lower-hearts {
- position:absolute;inset:auto 22% max(9dvh,env(safe-area-inset-bottom,0px));
- display:flex;justify-content:space-around;align-items:center;
- pointer-events:none;z-index:7;color:#df83bb;
-}
-.q10-lower-hearts span {
- font-size:clamp(21px,7vw,42px);line-height:1;
- text-shadow:0 0 6px white,0 0 15px #ed9bd5;
- animation:q10-lower-heart-rise 1.9s .25s ease-in-out both;
-}
-.q10-lower-hearts span:nth-child(2) {animation-delay:.42s;color:#c788df}
-.q10-lower-hearts span:nth-child(3) {animation-delay:.57s;color:#db93c4}
-@keyframes q10-lower-heart-rise {
- 0%{opacity:0;transform:translateY(12px) scale(.7)}
- 35%,70%{opacity:1}
- 100%{opacity:0;transform:translateY(-20px) scale(1.06)}
-}
-@media(prefers-reduced-motion:reduce) {
- .q10-lower-hearts span {animation:none}
 }
 </style>
 </head>
@@ -11318,7 +11299,7 @@ Promise.race([
     busy=true;button.disabled=true;
       const effect=document.createElement('div');
       effect.className='captcha-heart-celebration q10-completion-overlay q10-effects-pending';
-      effect.style.setProperty('--dream-duration','3s');
+      effect.style.setProperty('--dream-duration','5s');
       effect.setAttribute('aria-hidden','true');
       effect.innerHTML='<div class="captcha-heart-halo"></div><div class="captcha-heart-ring"></div><svg class="captcha-big-heart" viewBox="0 0 100 100"><path pathLength="1" fill="none" stroke="#FF88C2" stroke-width="2" d="M50 88C40 78 7 57 7 31C7 7 38 4 50 25C62 4 93 7 93 31C93 57 60 78 50 88Z"/></svg>';
       for(let i=0;i<4;i++){
@@ -11334,10 +11315,17 @@ Promise.race([
       content.className='q10-effect-content';
       content.append(effect.querySelector('.captcha-big-heart'),caption);
       effect.appendChild(content);
-      const lowerHearts=document.createElement('div');
-      lowerHearts.className='q10-lower-hearts';
-      lowerHearts.innerHTML='<span>♡</span><span>♥</span><span>♡</span>';
-      effect.appendChild(lowerHearts);
+      [24,50,76].forEach((position,index)=>{
+        const heart=document.createElement('span');
+        heart.className='captcha-heart-sparkle q10-wide-sparkle';
+        heart.textContent=index===1?'♥':'♡';
+        heart.style.left=position+'%';
+        heart.style.top='88%';
+        heart.style.setProperty('--size',(index===1?26:22)+'px');
+        heart.style.setProperty('--tint',['#B795DD','#EC9FC7','#95C9EC'][index]);
+        heart.style.animationDelay=(-index*.23)+'s';
+        effect.appendChild(heart);
+      });
       document.body.appendChild(effect);
       // Distribute particles over the viewport, reserving the caption's rows.
       const textBox=caption.getBoundingClientRect();
@@ -11394,7 +11382,7 @@ Promise.race([
         window.scrollTo({top:0,behavior:'instant'});
       }
       cleanup();
-        },3000);
+        },5000);
       });
     });
   },true);
