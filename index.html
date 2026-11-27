@@ -9411,7 +9411,13 @@ html body #app[id] #s15.screen[id] .captcha-message {
   font-size:clamp(16px,4.5vw,20px);line-height:1.4;
   text-align:center!important;overflow-wrap:anywhere;
 }
-html body #app[id] #s15.screen[id] .captcha-card.is-verified .captcha-message {font-size:clamp(24px,6.8vw,32px)!important;line-height:1.35;display:block;width:100%;margin-inline:auto!important;text-align:center!important;inset-inline:auto;transform:none;padding-inline:8px;box-sizing:border-box;text-wrap:balance}
+html body #app[id] #s15.screen[id] .captcha-card.is-verified .captcha-message {
+  display:grid;place-items:center;
+  width:100%;min-height:2.35em;margin-inline:auto!important;padding:8px;
+  box-sizing:border-box;text-align:center!important;text-wrap:balance;
+  font-size:clamp(24px,6.8vw,32px)!important;line-height:1.35;
+  inset-inline:auto;transform:none;
+}
 </style>
 <style id="reveal-crisp-captions-and-beams">
 .handsome-fullscreen[data-photo] .handsome-caption {
@@ -10032,6 +10038,7 @@ html body .memory-finale .memory-finale-message {
   font-size:min(8vw,38px);
   letter-spacing:0;
 }
+#s11 .memory-finale-title-heart,.memory-finale .memory-finale-title-heart {margin-inline-start:.22em}
 </style>
 <style id="memory-sticker-heading-style">
 html body #app[id] #s11.screen[id] > h2.memory-sticker-heading > img {
@@ -10061,9 +10068,9 @@ html body #app[id] #s11.screen[id].active .polaroid-slide.is-active .polaroid-ph
 <style id="fuji-approved-scene-composition">
 .fuji-preview-sheet {
   --fuji-photo-width:min(100vw,780px,60dvh);
-  --fuji-photo-height:calc(var(--fuji-photo-width) * .6675);
-  --fuji-gap:clamp(12px,2dvh,24px);
-  --fuji-top:22dvh;
+  --fuji-photo-height:calc(var(--fuji-photo-width) * .72);
+  --fuji-gap:clamp(14px,2.3dvh,26px);
+  --fuji-top:23dvh;
   --fuji-bottom:8dvh;
   --fuji-caption-height:calc(100dvh - var(--fuji-top) - var(--fuji-bottom) - var(--fuji-photo-height) - var(--fuji-gap));
   grid-template-rows:var(--fuji-top) auto minmax(0,1fr);
@@ -10071,7 +10078,7 @@ html body #app[id] #s11.screen[id].active .polaroid-slide.is-active .polaroid-ph
 }
 .fuji-preview-sheet .fuji-sky-slice {visibility:hidden}
 .fuji-preview-sheet .fuji-live-sky {display:none}
-.fuji-preview-core .fuji-preview-photo {width:89%;overflow:visible}
+.fuji-preview-core .fuji-preview-photo {width:96%;overflow:visible}
 .fuji-preview-core .fuji-preview-photo > .fuji-upper-sticker {
   top:-13%;right:5%;width:19%;height:31%;
 }
@@ -10113,6 +10120,7 @@ html body #app[id] #s11.screen[id].active .polaroid-slide.is-active .polaroid-ph
   .fuji-preview-sheet .fuji-streaming-light::after {animation:none;opacity:0}
 }
 </style>
+<style id="memory-that-day-caption-size">#s11 .polaroid-slide[data-memory-index="20"] .memory-handwritten-art {width:min(100%,calc(var(--caption-width) * 1.82));max-height:49px}</style>
 </head>
 <body>
 <div class="ambient-dots" aria-hidden="true">
@@ -11125,7 +11133,7 @@ Promise.race([
   const finale=document.createElement('div');
   finale.className='memory-finale';
   finale.setAttribute('aria-hidden','true');
-  finale.innerHTML='<div class="memory-finale-content"><div class="memory-finale-message">我們的故事未完待續♥</div><div class="memory-finale-ending"><p><span>這些照片不只是回憶，</span><span>是我們一起把<em class="memory-color-word">普通日子</em><br>變得很<em class="memory-color-word">快樂的證明</em>。</span><span>希望看到這裡的你，也很開心</span></p><button type="button">我還要更多的驚喜!~</button></div></div>';
+  finale.innerHTML='<div class="memory-finale-content"><div class="memory-finale-message">我們的故事未完待續<span class="memory-finale-title-heart">♥</span></div><div class="memory-finale-ending"><p><span>這些照片不只是回憶，</span><span>是我們一起把<em class="memory-color-word">普通日子</em><br>變得很<em class="memory-color-word">快樂的證明</em>。</span><span>希望看到這裡的你，也很開心</span></p><button type="button">我還要更多的驚喜!~</button></div></div>';
   const colors=['#B088FF','#5599FF','#FFB7DD','#FFD86B','#FFFFFF'];
   const symbols=['♥','✦','★','♡'];
   for(let i=0;i<34;i++){
@@ -11470,7 +11478,7 @@ Promise.race([
   countScrollTimer=setTimeout(()=>{
    countScrollUntil=0;
    if(countPage.classList.contains('active') && document.activeElement!==count &&
-      !dialog.open && quizAdvanceTimer===null)centerFillQuestion(9,true);
+      !dialog.open && quizAdvanceTimer===null)centerFillQuestion(9);
   },delay);
  }
  count.addEventListener('focus',cancelCountScroll);
