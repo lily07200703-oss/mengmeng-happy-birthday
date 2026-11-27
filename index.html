@@ -9248,7 +9248,7 @@ html body #app[id] #s0.screen[id] .cover-zone-5 .game-card > .game-line::before,
 html body #app[id] #s0.screen[id] .cover-zone-5 .game-card > .game-line::after {display:none!important}
 html body #app[id] #s0.screen[id] .cover-zone-5 .game-card > .game-line .keep {
   display:inline-block!important;width:max-content!important;max-width:none!important;white-space:nowrap!important;overflow-wrap:normal!important;word-break:normal!important;
-  flex:none!important;font-size:min(6.1vw,32px)!important;font-size:min(7.6cqi,34px)!important;line-height:1.22!important;letter-spacing:-.035em!important;animation:none!important;transition:none!important;transform:scaleX(.72)!important;transform-origin:center!important;
+  flex:none!important;font-size:min(6.3vw,31px)!important;font-size:min(6.65cqi,31px)!important;line-height:1.2!important;letter-spacing:-.02em!important;animation:none!important;transition:none!important;transform:scaleX(.9)!important;transform-origin:center!important;
 }
 html body #app[id] #s0.screen[id] .cover-zone-5 .game-card > .game-sub {
   display:grid!important;justify-items:center!important;gap:4px!important;
@@ -9645,14 +9645,14 @@ html body #app[id] :is(#s8,#s9).screen[id] {
   --sunset-ray:conic-gradient(from calc(var(--sunset-light-axis) - 19deg) at var(--sunset-light-origin),transparent 0deg,#fff2bd28 7deg,#fffdf0c7 19deg,#fff0ad48 30deg,transparent 38deg);
   display:block;position:absolute;inset:0;pointer-events:none;z-index:3;
   overflow:hidden;mix-blend-mode:normal;
-  -webkit-mask-image:linear-gradient(#000 0 52%,transparent 82%);
-  mask-image:linear-gradient(#000 0 52%,transparent 82%);
+  -webkit-mask-image:linear-gradient(#000 0 16%,#0006 34%,#0005 62%,#0002 74%,transparent 84%);
+  mask-image:linear-gradient(#000 0 16%,#0006 34%,#0005 62%,#0002 74%,transparent 84%);
 }
 .handsome-fullscreen[data-photo="0"] .handsome-stage {z-index:2}
 .sunset-streaming-light::before,.sunset-streaming-light::after {
   content:"";position:absolute;inset:0;background:var(--sunset-ray);
 }
-.sunset-streaming-light::before {opacity:.62}
+.sunset-streaming-light::before {opacity:.46}
 .sunset-streaming-light::after {
   -webkit-mask:linear-gradient(transparent 28%,#000 46%,transparent 65%) no-repeat 0 100% / 100% 200%;
   mask:linear-gradient(transparent 28%,#000 46%,transparent 65%) no-repeat 0 100% / 100% 200%;
@@ -9660,8 +9660,8 @@ html body #app[id] :is(#s8,#s9).screen[id] {
 }
 @keyframes sunset-light-flow {
   0% {opacity:0;-webkit-mask-position:0 100%;mask-position:0 100%}
-  25% {opacity:.92}
-  70% {opacity:.57}
+  25% {opacity:.69}
+  70% {opacity:.51}
   100% {opacity:0;-webkit-mask-position:0 0;mask-position:0 0}
 }
 @media(prefers-reduced-motion:reduce) {
@@ -10119,6 +10119,16 @@ html body #app[id] #s11.screen[id] > h2.memory-sticker-heading > img {
 .q10-completion-overlay.q10-effects-pending,
 .q10-completion-overlay.q10-effects-pending * {
  animation-play-state:paused!important;
+}
+</style>
+<style id="cover-invite-reading-room">
+@media(max-width:600px) {
+ html body #app[id] #s0.screen[id] .cover-zone-5 .game-card {
+  padding-inline:6px!important;
+ }
+ html body #app[id] #s0.screen[id] .cover-zone-5 .game-card > .game-line {
+  width:100%!important;min-height:50px!important;padding-inline:5px!important;
+ }
 }
 </style>
 </head>
@@ -11315,17 +11325,19 @@ Promise.race([
       content.className='q10-effect-content';
       content.append(effect.querySelector('.captcha-big-heart'),caption);
       effect.appendChild(content);
-      [24,50,76].forEach((position,index)=>{
-        const heart=document.createElement('span');
-        heart.className='captcha-heart-sparkle q10-wide-sparkle';
-        heart.textContent=index===1?'♥':'♡';
-        heart.style.left=position+'%';
-        heart.style.top='88%';
-        heart.style.setProperty('--size',(index===1?26:22)+'px');
-        heart.style.setProperty('--tint',['#B795DD','#EC9FC7','#95C9EC'][index]);
-        heart.style.animationDelay=(-index*.23)+'s';
-        effect.appendChild(heart);
-      });
+      for(const row of [12,88]){
+        [24,50,76].forEach((position,index)=>{
+          const heart=document.createElement('span');
+          heart.className='captcha-heart-sparkle q10-wide-sparkle';
+          heart.textContent=index===1?'♥':'♡';
+          heart.style.left=position+'%';
+          heart.style.top=row+'%';
+          heart.style.setProperty('--size',(index===1?26:22)+'px');
+          heart.style.setProperty('--tint',['#B795DD','#EC9FC7','#95C9EC'][index]);
+          heart.style.animationDelay=(-index*.23)+'s';
+          effect.appendChild(heart);
+        });
+      }
       document.body.appendChild(effect);
       // Distribute particles over the viewport, reserving the caption's rows.
       const textBox=caption.getBoundingClientRect();
@@ -11353,7 +11365,7 @@ Promise.race([
           if(x>heartBox.left-50 && x<heartBox.right+50 && y>heartBox.top-50 && y<heartBox.bottom+50)continue;
           const star=document.createElement('span');
           star.className='captcha-heart-sparkle q10-wide-sparkle';
-          star.textContent=['✦','♡','✧','♥'][i%4];
+          star.textContent=['✦','✧'][i%2];
           star.style.left=x+'px';star.style.top=y+'px';
           star.style.setProperty('--size',(14+i%4*4)+'px');
           star.style.setProperty('--tint',['#B795DD','#EC9FC7','#95C9EC','#D5ADD9'][i%4]);
